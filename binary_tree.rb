@@ -5,6 +5,28 @@ class BinaryTree
    self.root = node
  end
 
+ def insert(value)
+   if root.nil?
+   	self.root = Node.new(nil,nil, value)
+   end
+   current_node = root
+   previous_node = root
+
+   while !current_node.nil?
+      previous_node = current_node
+      if value < current_node.value
+        current_node = current_node.left
+      else
+        current_node = current_node.right
+      end
+   end
+   if value < previous_node.value
+     previous_node.left = Node.new(nil,nil,value)
+   else
+     previous_node.right = Node.new(nil,nil,value)
+   end
+ end
+ 	
  def find(value)
  	return true if value == root
  	node_finder(root, value)
@@ -46,11 +68,16 @@ puts bt.root.value
 puts bt.root.left.value
 puts bt.root.right.value
 
-# returns true
+# # returns true
 puts bt.find(1) 
 
-# returns false
+# # returns false
 puts bt.find(2) 
+
+bt.insert(8)
+bt.insert(6)
+bt.insert(3)
+bt.insert(9)
 
     #  7
    # /  \
